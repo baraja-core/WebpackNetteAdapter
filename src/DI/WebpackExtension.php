@@ -4,7 +4,6 @@ declare(strict_types = 1);
 
 namespace Oops\WebpackNetteAdapter\DI;
 
-use GuzzleHttp\Client;
 use Nette\Bridges\ApplicationLatte\ILatteFactory;
 use Nette\DI\CompilerExtension;
 use Nette\DI\Definitions\FactoryDefinition;
@@ -100,7 +99,6 @@ class WebpackExtension extends CompilerExtension
 				$config['devServer']['url'] ?? '',
 				$config['devServer']['publicUrl'],
 				$config['devServer']['timeout'],
-				new Statement(Client::class),
 			]);
 
 		$assetLocator = $builder->addDefinition($this->prefix('assetLocator'))
@@ -179,8 +177,7 @@ class WebpackExtension extends CompilerExtension
 					$config['devServer']['enabled'],
 					$config['devServer']['url'] ?? '',
 					$config['devServer']['publicUrl'] ?? '',
-					$config['devServer']['timeout'],
-					new Client()
+					$config['devServer']['timeout']
 				);
 
 				$mapperInstance = new $config['manifest']['mapper']();
